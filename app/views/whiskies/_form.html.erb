@@ -46,6 +46,11 @@
   </div>
 
   <div>
+    <%= form.label :images, "画像（最大3枚）" %><br>
+    <%= form.file_field :images, multiple: true, accept: 'image/*' %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
