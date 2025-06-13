@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  genre: MyString
+  country: MyString
+  status: 1
+  rating: 1
+  comment: MyText
+  drank_on: 2025-06-13
+  user: one
+
+two:
+  name: MyString
+  genre: MyString
+  country: MyString
+  status: 1
+  rating: 1
+  comment: MyText
+  drank_on: 2025-06-13
+  user: two
