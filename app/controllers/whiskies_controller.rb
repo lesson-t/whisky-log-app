@@ -44,6 +44,6 @@ class WhiskiesController < ApplicationController
   end
 
   def whisky_params
-    params.require(:whisky).permit(:name, :genre, :country, :status, :rating, :comment, :drank_on)
+    params.require(:whisky).permit(:name, :genre, :country, :status, :rating, :comment, :drank_on, images: [])
   end
 end
