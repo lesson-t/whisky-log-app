@@ -40,7 +40,7 @@ class WhiskiesController < ApplicationController
   private
 
   def set_whisky
-    @whisky = current_user.whiskeis.find(params[:id])
+    @whisky = current_user.whiskies.find(params[:id])
   end
 
   def whisky_params
