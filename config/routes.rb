@@ -13,5 +13,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "whiskies#index"
 
-  resources :whiskies
+  resources :whiskies do
+    member do
+      delete 'remove_image/:image_id', to: 'whiskies#remove_image', as: 'remove_image'
+    end
+  end
 end
