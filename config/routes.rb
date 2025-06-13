@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'whiskies/index'
+  get 'whiskies/show'
+  get 'whiskies/new'
+  get 'whiskies/edit'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
