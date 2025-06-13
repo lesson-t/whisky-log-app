@@ -7,3 +7,29 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+require 'faker'
+
+user = User.first || User.create!(email: "sample@example.com", password: "password")
+
+image_path = Rails.root.join("app/assets/images/test1.jpg")
+
+genres = ['シングルモルト', 'ブレンデッド', 'グレーン', 'バーボン']
+countries = ['日本', 'スコットランド', 'アメリカ', 'カナダ', 'アイルランド']
+
+20.times do
+  whisky = user.whiskies.create!(
+    name: Faker::Beer.name + " Whisky",
+    genre: genres.sample,
+    country: countries.sample,
+    status: [0, 1].sample, # enum: 未飲 or 飲んだ
+    rating: rand(1..5),
+    comment: Faker::Lorem.sentence,
+    drank_on: rand(30).days.ago
+  )
+
+  # ActiveStorage に画像を添付
+  whisky.images.attach(
+    io: File.open(image_path),
+    filename: "test1.jpg")
+end
