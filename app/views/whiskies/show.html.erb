@@ -7,5 +7,14 @@
 <p><strong>感想:</strong> <%= @whisky.comment %></p>
 <p><strong>飲んだ日:</strong> <%= @whisky.drank_on %></p>
 
+<h2>登録画像</h2>
+<% if @whisky.images.attached? %>
+  <% @whisky.images.each do |image| %>
+    <%= image_tag image.variant(resize_to_limit: [300, 300]) %>
+  <% end %>
+<% else %>
+  <p>画像は登録されていません。</p>
+<% end %>
+
 <%= link_to '編集', edit_whisky_path(@whisky) %> |
 <%= link_to '一覧に戻る', whiskies_path %>
