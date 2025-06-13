@@ -1,2 +1,5 @@
-<h1>Whiskies#new</h1>
-<p>Find me in app/views/whiskies/new.html.erb</p>
+<h1>ウイスキーを登録</h1>
+
+<%= render 'form', whisky: @whisky %>
+
+<%= link_to '戻る', whiskies_path %>

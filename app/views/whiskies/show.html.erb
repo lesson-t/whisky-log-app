@@ -1,2 +1,11 @@
-<h1>Whiskies#show</h1>
-<p>Find me in app/views/whiskies/show.html.erb</p>
+<h1><%= @whisky.name %></h1>
+
+<p><strong>ジャンル:</strong> <%= @whisky.genre %></p>
+<p><strong>国:</strong> <%= @whisky.country %></p>
+<p><strong>状態:</strong> <%= @whisky.status %></p>
+<p><strong>評価:</strong> <%= @whisky.rating %></p>
+<p><strong>感想:</strong> <%= @whisky.comment %></p>
+<p><strong>飲んだ日:</strong> <%= @whisky.drank_on %></p>
+
+<%= link_to '編集', edit_whisky_path(@whisky) %> |
+<%= link_to '一覧に戻る', whiskies_path %>

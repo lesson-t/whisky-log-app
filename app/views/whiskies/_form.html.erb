@@ -1,0 +1,51 @@
+<%= form_with(model: whisky, local: true) do |form| %>
+  <% if whisky.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(whisky.errors.count, "error") %> prohibited this whisky from being saved:</h2>
+      <ul>
+        <% whisky.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "銘柄名" %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :genre, "ジャンル（例：スコッチ、バーボン）" %><br>
+    <%= form.text_field :genre %>
+  </div>
+
+  <div>
+    <%= form.label :country, "原産国" %><br>
+    <%= form.text_field :country %>
+  </div>
+
+  <div>
+    <%= form.label :status, "状態" %><br>
+    <%= form.select :status, Whisky.statuses.keys.map { |k| [k, k] } %>
+  </div>
+
+  <div>
+    <%= form.label :rating, "評価（1〜5）" %><br>
+    <%= form.number_field :rating, in: 1..5 %>
+  </div>
+
+  <div>
+    <%= form.label :comment, "感想・メモ" %><br>
+    <%= form.text_area :comment %>
+  </div>
+
+  <div>
+    <%= form.label :drank_on, "飲んだ日" %><br>
+    <%= form.date_field :drank_on %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
