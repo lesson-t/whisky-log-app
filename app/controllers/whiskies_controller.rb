@@ -2,7 +2,7 @@ class WhiskiesController < ApplicationController
   before_action :set_whisky, only: %i[show edit update destroy]
 
   def index
-    @whiskeis = current_user.whiskeis.order(drank_on: :desc)
+    @whiskies = current_user.whiskies.order(drank_on: :desc)
   end
 
   def show
@@ -22,6 +22,9 @@ class WhiskiesController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
     if @whisky.update(whisky_params)
       redirect_to @whisky, notice: "ウイスキー情報を更新しました。"
     else
