@@ -5,7 +5,7 @@ class Whisky < ApplicationRecord
 
   validates :name, :genre, :country, :status, presence: true
   validates :rating, inclusion: { in: 1..5 }, allow_nil: true
-  validates :images_count_within_limit
+  validate :images_count_within_limit
 
   enum status: { 未飲: 0, 飲んだ: 1 }
 
