@@ -2,6 +2,27 @@
 
 <%= link_to '新しく登録する', new_whisky_path %>
 
+<%= search_form_for @q, url: whiskies_path, method: :get do |f| %>
+  <div>
+    <%= f.label :name_cont, "名前に含まれる語句" %>
+    <%= f.search_field :name_cont %>
+  </div>
+
+  <div>
+    <%= f.label :genre_eq, "ジャンル" %>
+    <%= f.select :genre_eq, Whisky.pluck(:genre).uniq.compact, include_blank: "選択してください" %>
+  </div>
+
+  <div>
+    <%= f.label :country_eq, "国" %>
+    <%= f.select :country_eq, Whisky.pluck(:country).uniq.compact, include_blank: "選択してください" %>
+  </div>
+
+  <div>
+    <%= f.submit "検索" %>
+  </div>
+<% end %>
+
 <table>
   <thead>
     <tr>

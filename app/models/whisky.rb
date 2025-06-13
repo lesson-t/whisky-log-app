@@ -14,4 +14,8 @@ class Whisky < ApplicationRecord
       errors.add(:images, "は最大3枚までアップロードできます")
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["comment", "country", "created_at", "drank_on", "genre", "id", "id_value", "name", "rating", "status", "updated_at", "user_id"]
+  end
 end
