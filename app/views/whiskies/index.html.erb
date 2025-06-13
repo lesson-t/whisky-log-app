@@ -26,12 +26,12 @@
 <table>
   <thead>
     <tr>
-      <th>名前</th>
-      <th>ジャンル</th>
-      <th>国</th>
+      <th><%= sort_link(@q, :name, "名前") %></th>
+      <th><%= sort_link(@q, :genre, "ジャンル") %></th>
+      <th><%= sort_link(@q, :country, "国") %></th>
       <th>評価</th>
       <th>状態</th>
-      <th>飲んだ日</th>
+      <th><%= sort_link(@q, :drank_on, "飲んだ日") %></th>
       <th>操作</th>
     </tr>
   </thead>
