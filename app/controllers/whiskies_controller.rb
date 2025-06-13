@@ -2,7 +2,10 @@ class WhiskiesController < ApplicationController
   before_action :set_whisky, only: %i[show edit update destroy]
 
   def index
-    @whiskies = current_user.whiskies.order(drank_on: :desc)
+    @q = current_user.whiskies.ransack(params[:q])
+    @whiskies = @q.result(distinct: true).order(drank_on: :desc)
+
+    # @whiskies = current_user.whiskies.order(drank_on: :desc)
   end
 
   def show
