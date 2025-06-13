@@ -1,0 +1,34 @@
+<h1>登録済みウイスキー一覧</h1>
+
+<%= link_to '新しく登録する', new_whisky_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>ジャンル</th>
+      <th>国</th>
+      <th>評価</th>
+      <th>状態</th>
+      <th>飲んだ日</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @whiskies.each do |whisky| %>
+      <tr>
+        <td><%= whisky.name %></td>
+        <td><%= whisky.genre %></td>
+        <td><%= whisky.country %></td>
+        <td><%= whisky.rating %></td>
+        <td><%= whisky.status %></td>
+        <td><%= whisky.drank_on %></td>
+        <td>
+          <%= link_to '詳細', whisky_path(whisky) %> |
+          <%= link_to '編集', edit_whisky_path(whisky) %> |
+          <%= link_to '削除', whisky, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
