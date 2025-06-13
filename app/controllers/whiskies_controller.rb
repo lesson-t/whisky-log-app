@@ -42,7 +42,7 @@ class WhiskiesController < ApplicationController
     @whisky = current_user.whiskies.find(params[:id])
     image = @whisky.images.find(params[:image_id])
     image.purge
-    redirect_to @whisky, notice: "画像を削除しました", status: :see_other
+    redirect_to @whisky, notice: "画像を削除しました"
   end
 
   private
