@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "chartkick" # @5.0.1
 pin "chart.js" # @4.4.9
 pin "@kurkle/color", to: "@kurkle--color.js" # @0.3.4
+pin "chart.js/auto", to: "chart.js--auto.js" # @4.4.9
