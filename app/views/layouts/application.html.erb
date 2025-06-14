@@ -22,12 +22,22 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <%= link_to "マイページ", mypage_path %>
-    <% end %>
+    <header>
+      <% if user_signed_in? %>
+        <%= link_to "マイページ", mypage_path %> |
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path %>
+      <% end %>
+    </header>
+
     <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
-    <%= yield %>
+    
+    <main>
+      <%= yield %>
+    </main>
+
   </body>
 </html>
