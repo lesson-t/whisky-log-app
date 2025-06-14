@@ -1,0 +1,10 @@
+<h1><%= current_user.email %>さんのマイページ</h1>
+
+<h2>記録したウイスキー一覧（最新10件）</h2>
+<ul>
+  <% @whiskies.order(drank_on: :desc).limit(10).each do |whisky| %>
+    <li>
+      <%= whisky.drank_on %> - <%= whisky.name %>（評価：<%= whisky.rating %>）
+    </li>
+  <% end %>
+</ul>
