@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "whiskies#index"
 
+  get 'mypage', to: 'users#mypage'
+
   resources :whiskies do
     member do
       delete 'remove_image/:image_id', to: 'whiskies#remove_image', as: 'remove_image'
