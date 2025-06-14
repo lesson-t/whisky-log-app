@@ -1,0 +1,19 @@
+<h1><%= current_user.email %>さんのマイページ</h1>
+
+<h2>記録したウイスキー一覧（最新10件）</h2>
+<ul>
+  <% @whiskies.order(drank_on: :desc).limit(10).each do |whisky| %>
+    <li>
+      <%= whisky.drank_on %> - <%= whisky.name %>（評価：<%= whisky.rating %>）
+    </li>
+  <% end %>
+</ul>
+
+<h2>📆 月ごとの記録本数</h2>
+<%= line_chart current_user.whiskies.group_by_month(:drank_on).count %>
+
+<h2>⭐ 評価の分布</h2>
+<%= pie_chart current_user.whiskies.group(:rating).count %>
+
+<h2>🥃 ジャンル別の本数</h2>
+<%= bar_chart current_user.whiskies.group(:genre).count %>
