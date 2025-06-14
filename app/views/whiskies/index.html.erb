@@ -46,8 +46,10 @@
         <td><%= whisky.drank_on %></td>
         <td>
           <%= link_to '詳細', whisky_path(whisky) %> |
-          <%= link_to '編集', edit_whisky_path(whisky) %> |
-          <%= link_to '削除', whisky, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+          <% if whisky.user == current_user %>
+            <%= link_to '編集', edit_whisky_path(whisky) %> |
+            <%= link_to '削除', whisky, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+          <% end %>
         </td>
       </tr>
     <% end %>
