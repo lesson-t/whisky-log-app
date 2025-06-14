@@ -54,6 +54,7 @@
   </tbody>
 </table>
 
+<p>全 <%= @pagy.count %> 件中 <%= @pagy.from %> 件目〜<%= @pagy.to %> 件目を表示</p>
 <%== pagy_nav(@pagy) %>
 <!--
 Bootstrap追加用

@@ -3,7 +3,7 @@ class WhiskiesController < ApplicationController
 
   def index
     @q = current_user.whiskies.ransack(params[:q])
-    @pagy, @whiskies = pagy(@q.result(distinct: true).order(drank_on: :desc))
+    @pagy, @whiskies = pagy(@q.result(distinct: true).order(drank_on: :desc), times: 10)
 
     # @whiskies = current_user.whiskies.order(drank_on: :desc)
   end
