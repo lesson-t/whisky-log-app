@@ -1,26 +1,30 @@
-<h1><%= @whisky.name %></h1>
+<h1 class="text-3xl font-bold mt-6 mb-6"><%= @whisky.name %></h1>
 
-<p><strong>ジャンル:</strong> <%= @whisky.genre %></p>
-<p><strong>国:</strong> <%= @whisky.country %></p>
-<p><strong>状態:</strong> <%= @whisky.status %></p>
-<p><strong>評価:</strong> <%= @whisky.rating %></p>
-<p><strong>感想:</strong> <%= @whisky.comment %></p>
-<p><strong>飲んだ日:</strong> <%= @whisky.drank_on %></p>
+<p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>ジャンル:</strong> <%= @whisky.genre %></p>
+<p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>国:</strong> <%= @whisky.country %></p>
+<p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>状態:</strong> <%= @whisky.status %></p>
+<p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>評価:</strong> <%= @whisky.rating %></p>
+<p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>感想:</strong> <%= @whisky.comment %></p>
+<p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>飲んだ日:</strong> <%= @whisky.drank_on %></p>
 
-<h2>登録画像</h2>
-<% if @whisky.images.attached? %>
-  <% @whisky.images.each do |image| %>
-    <%= image_tag image.variant(resize_to_limit: [300, 300]) %>
-    <% if whisky.user == current_user %>
-      <%= link_to '画像を削除', remove_image_whisky_path(@whisky, image_id: image.id),
-                  data: { turbo_method: :delete, confirm: "この画像を削除しますか？" } %>
+<div class="mb-8 border-b border-gray-200">
+  <h2 class="text-grey-500 text-xl mb-4 font-bold">登録画像</h2>
+  <% if @whisky.images.attached? %>
+    <% @whisky.images.each do |image| %>
+      <%= image_tag image.variant(resize_to_limit: [300, 300]) %>
+      <% if whisky.user == current_user %>
+        <%= link_to '画像を削除', remove_image_whisky_path(@whisky, image_id: image.id),
+                    data: { turbo_method: :delete, confirm: "この画像を削除しますか？" } %>
+      <% end %>
     <% end %>
+  <% else %>
+    <p>画像は登録されていません。</p>
   <% end %>
-<% else %>
-  <p>画像は登録されていません。</p>
-<% end %>
+</div>
 
-<% if whisky.user == current_user %>
-  <%= link_to '編集', edit_whisky_path(@whisky) %> |
-<% end %>
-<%= link_to '一覧に戻る', whiskies_path %>
+<div>
+  <% if @whisky.user == current_user %>
+    <%= link_to '編集', edit_whisky_path(@whisky), class: "font-bold text-red-500" %> |
+  <% end %>
+  <%= link_to '一覧に戻る', whiskies_path, class: "font-bold text-blue-500" %>
+</div>

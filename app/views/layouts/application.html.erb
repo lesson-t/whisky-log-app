@@ -22,21 +22,32 @@
 
   </head>
 
-  <body>
-    <header>
-      <% if user_signed_in? %>
-        <%= link_to "マイページ", mypage_path %> |
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "ログイン", new_user_session_path %>
-      <% end %>
-    </header>
+  <body class="bg-gray-100 min-h-screen text-gray-800">
 
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+    <header class="bg-white shadow text-gray-600 body-font">
+      <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+          <h1 class="text-2xl font-bold text-blue-700">Whisky Log</h1>
+        </a>
+        <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+          <% if user_signed_in? %>
+            <%= link_to "マイページ", mypage_path, class: "mr-5 hover:text-gray-900" %>
+          <% end %>
+        </nav>
+        <% if user_signed_in? %>
+          <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" %>
+        <% else %>
+          <%= button_to "ログイン", new_user_session_path, class: "inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" %>
+        <% end %>
+      </div>
+    </header>
     
-    <main>
+    <main class="container mx-auto px-4">
+      <% flash.each do |key, value| %>
+        <div class="mb-4 p-4 rounded text-white <%= key == 'alert' ? 'bg-red-500' : 'bg-green-500' %>">
+          <%= value %>
+        </div>
+      <% end %>
       <%= yield %>
     </main>
 

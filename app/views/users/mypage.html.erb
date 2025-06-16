@@ -1,19 +1,25 @@
-<h1><%= current_user.email %>さんのマイページ</h1>
+<h1 class="text-2xl font-bold mt-6 mb-10"><%= current_user.email %>さんのマイページ</h1>
 
-<h2>記録したウイスキー一覧（最新10件）</h2>
-<ul>
+<h2 class="text-grey-500 text-xl font-bold mb-6 border-b border-gray-400">記録したウイスキー一覧（最新10件）</h2>
+<ul class="mb-10">
   <% @whiskies.order(drank_on: :desc).limit(10).each do |whisky| %>
-    <li>
+    <li class="mb-2  border-b border-gray-200">
       <%= whisky.drank_on %> - <%= whisky.name %>（評価：<%= whisky.rating %>）
     </li>
   <% end %>
 </ul>
 
-<h2>📆 月ごとの記録本数</h2>
-<%= line_chart current_user.whiskies.group_by_month(:drank_on).count %>
+<div class="mb-10">
+  <h2 class="mb-6 text-grey-500 text-xl font-bold">📆 月ごとの記録本数</h2>
+  <%= line_chart current_user.whiskies.group_by_month(:drank_on).count %>
+</div>
 
-<h2>⭐ 評価の分布</h2>
-<%= pie_chart current_user.whiskies.group(:rating).count %>
+<div class="mb-10">
+  <h2 class="mb-6 text-grey-500 text-xl font-bold">⭐ 評価の分布</h2>
+  <%= pie_chart current_user.whiskies.group(:rating).count %>
+</div>
 
-<h2>🥃 ジャンル別の本数</h2>
-<%= bar_chart current_user.whiskies.group(:genre).count %>
+<div class="mb-10">
+  <h2 class="mb-6 text-grey-500 text-xl font-bold">🥃 ジャンル別の本数</h2>
+  <%= bar_chart current_user.whiskies.group(:genre).count %>
+</div>
