@@ -20,7 +20,7 @@
   <p>画像は登録されていません。</p>
 <% end %>
 
-<% if whisky.user == current_user %>
+<% if @whisky.user == current_user %>
   <%= link_to '編集', edit_whisky_path(@whisky) %> |
 <% end %>
 <%= link_to '一覧に戻る', whiskies_path %>

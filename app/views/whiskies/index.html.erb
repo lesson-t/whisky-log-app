@@ -1,63 +1,71 @@
-<h1>登録済みウイスキー一覧</h1>
+<h1 class="text-2xl font-bold mb-6">登録済みウイスキー一覧</h1>
 
-<%= link_to '新しく登録する', new_whisky_path %>
 
-<%= search_form_for @q, url: whiskies_path, method: :get do |f| %>
+<div class="mb-4">
+  <%= link_to '新しく登録する', new_whisky_path, class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+</div>
+
+<%= search_form_for @q, url: whiskies_path, method: :get, class: "bg-gray-100 p-4 rounded-md space-y-4 mb-6" do |f| %>
   <div>
-    <%= f.label :name_cont, "名前に含まれる語句" %>
-    <%= f.search_field :name_cont %>
+    <%= f.label :name_cont, "名前に含まれる語句", class: "block font-semibold" %>
+    <%= f.search_field :name_cont, class: "w-full border rounded px-3 py-2" %>
   </div>
 
   <div>
-    <%= f.label :genre_eq, "ジャンル" %>
-    <%= f.select :genre_eq, Whisky.pluck(:genre).uniq.compact, include_blank: "選択してください" %>
+    <%= f.label :genre_eq, "ジャンル", class: "block font-semibold" %>
+    <%= f.select :genre_eq, Whisky.pluck(:genre).uniq.compact, include_blank: "選択してください", class: "w-full border rounded px-3 py-2" %>
   </div>
 
   <div>
-    <%= f.label :country_eq, "国" %>
-    <%= f.select :country_eq, Whisky.pluck(:country).uniq.compact, include_blank: "選択してください" %>
+    <%= f.label :country_eq, "国", class: "block font-semibold" %>
+    <%= f.select :country_eq, Whisky.pluck(:country).uniq.compact, include_blank: "選択してください", class: "w-full border rounded px-3 py-2" %>
   </div>
 
   <div>
-    <%= f.submit "検索" %>
+    <%= f.submit "検索", class: "bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900" %>
   </div>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th><%= sort_link(@q, :name, "名前") %></th>
-      <th><%= sort_link(@q, :genre, "ジャンル") %></th>
-      <th><%= sort_link(@q, :country, "国") %></th>
-      <th>評価</th>
-      <th>状態</th>
-      <th><%= sort_link(@q, :drank_on, "飲んだ日") %></th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @whiskies.each do |whisky| %>
-      <tr>
-        <td><%= whisky.name %></td>
-        <td><%= whisky.genre %></td>
-        <td><%= whisky.country %></td>
-        <td><%= whisky.rating %></td>
-        <td><%= whisky.status %></td>
-        <td><%= whisky.drank_on %></td>
-        <td>
-          <%= link_to '詳細', whisky_path(whisky) %> |
-          <% if whisky.user == current_user %>
-            <%= link_to '編集', edit_whisky_path(whisky) %> |
-            <%= link_to '削除', whisky, method: :delete, data: { confirm: "本当に削除しますか？" } %>
-          <% end %>
-        </td>
+<div class="overflow-x-auto">
+  <table class="min-w-full bg-white border rounded shadow-sm">
+    <thead>
+      <tr class="bg-gray-100 text-left text-sm font-semibold text-gray-700">
+        <th class="px-4 py-2 border"><%= sort_link(@q, :name, "名前") %></th>
+        <th class="px-4 py-2 border"><%= sort_link(@q, :genre, "ジャンル") %></th>
+        <th class="px-4 py-2 border"><%= sort_link(@q, :country, "国") %></th>
+        <th class="px-4 py-2 border">評価</th>
+        <th class="px-4 py-2 border">状態</th>
+        <th class="px-4 py-2 border"><%= sort_link(@q, :drank_on, "飲んだ日") %></th>
+        <th class="px-4 py-2 border">操作</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody class="text-sm text-gray-800">
+      <% @whiskies.each do |whisky| %>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2 border"><%= whisky.name %></td>
+          <td class="px-4 py-2 border"><%= whisky.genre %></td>
+          <td class="px-4 py-2 border"><%= whisky.country %></td>
+          <td class="px-4 py-2 border"><%= whisky.rating || "-" %></td>
+          <td class="px-4 py-2 border"><%= whisky.status %></td>
+          <td class="px-4 py-2 border"><%= whisky.drank_on %></td>
+          <td class="px-4 py-2 border space-x-2 whitespace-nowrap">
+            <%= link_to '詳細', whisky_path(whisky), class: "text-blue-600 hover:underline" %>
+            <% if whisky.user == current_user %>
+              <%= link_to '編集', edit_whisky_path(whisky), class: "text-green-600 hover:underline" %>
+              <%= link_to '削除', whisky, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "text-red-600 hover:underline" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<p>全 <%= @pagy.count %> 件中 <%= @pagy.from %> 件目〜<%= @pagy.to %> 件目を表示</p>
-<%== pagy_nav(@pagy) %>
+<p class="mt-6 text-sm text-gray-500">全 <%= @pagy.count %> 件中 <%= @pagy.from %> 件目〜<%= @pagy.to %> 件目を表示</p>
+
+<div class="mt-4">
+  <%== pagy_nav(@pagy) %>
+</div>
 <!--
 Bootstrap追加用
 <%== pagy_bootstrap_nav(@pagy) %>
