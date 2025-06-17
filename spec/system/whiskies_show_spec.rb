@@ -5,7 +5,7 @@ RSpec.describe "WhiskiesShow", type: :system do
   let!(:whisky) { create(:whisky, name: "山崎", comment: "フルーティー", user: user) }
 
   before do
-    driven_by(:rack_test)
+    # driven_by(:rack_test)
     sign_in user
   end
 
