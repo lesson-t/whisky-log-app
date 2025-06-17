@@ -21,4 +21,9 @@ RSpec.describe "Whiskies Create", type: :system do
     expect(page).to have_content "白州"
     expect(current_path).to eq whisky_path(Whisky.last)
   end
+
+  it "名前を未入力だとエラーメッセージが出る" do
+    click_button "登録"
+    expect(page).to have_content "Name can't be blank" # 日本語化する"名前を入力してください"
+  end
 end
