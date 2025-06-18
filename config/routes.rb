@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'favorites/create'
+  get 'favorites/destroy'
   get 'whiskies/index'
   get 'whiskies/show'
   get 'whiskies/new'

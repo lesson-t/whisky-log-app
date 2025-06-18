@@ -1,0 +1,21 @@
+class FavoritesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_whisky
+
+  def create
+    current_user.favorites.create(whisky: @whisky)
+    redirect_back fallback_location: whiskies_path
+  end
+
+  def destroy
+    favorite = current_user.favorites.find_by(whisky: @whisky)
+    favorite&.destroy
+    redirect_back fallback_location: whiskies_path
+  end
+
+  private
+
+  def set_whisky
+    @whisky = Whisky.find(params[:whisky_id])
+  end
+end
