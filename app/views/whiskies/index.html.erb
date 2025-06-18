@@ -50,6 +50,11 @@
           <td class="p-4 border-b border-gray-50"><%= whisky.drank_on %></td>
           <td class="px-4 py-2 border-gray-500 space-x-2 whitespace-nowrap">
             <%= link_to '詳細', whisky_path(whisky), class: "text-blue-600 hover:underline" %>
+            <% if current_user.favorite_whiskies.include?(whisky) %>
+              <%= button_to 'お気に入り解除', whisky_favorite_path(whisky), method: :delete, class: "text-yellow-600" %>
+            <% else %>
+              <%= button_to 'お気に入り', whisky_favorite_path(whisky), method: :post, class: "text-gray-600" %>
+            <% end %>
             <% if whisky.user == current_user %>
               <%= link_to '編集', edit_whisky_path(whisky), class: "text-green-600 hover:underline" %>
               <%= link_to '削除', whisky, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "text-red-600 hover:underline" %>
