@@ -1,7 +1,8 @@
 class WhiskiesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_whisky, only: %i[show edit update destroy remove_image]
+  before_action :set_whisky #, only: %i[show edit update destroy remove_image]
   before_action :correct_user, only: %i[edit update destroy remove_image]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def index
     @q = current_user.whiskies.ransack(params[:q])
@@ -53,11 +54,17 @@ class WhiskiesController < ApplicationController
   private
 
   def set_whisky
-    @whisky = current_user.whiskies.find(params[:id])
+    @whisky = Whisky.find(params[:id])
   end
 
   def correct_user
     redirect_to root_path, alert: "権限がありません" unless @whisky.user == current_user
+  end
+
+  def authorize_user!
+    unless @whisky.user == current_user
+      redirect_to root_path, alert: "Not authorized"
+    end
   end
 
   def whisky_params
