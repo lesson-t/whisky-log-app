@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'mypage', to: 'users#mypage'
 
   resources :whiskies do
+    resource :favorite, only: [:create, :destroy]
     member do
       delete 'remove_image/:image_id', to: 'whiskies#remove_image', as: 'remove_image'
     end
