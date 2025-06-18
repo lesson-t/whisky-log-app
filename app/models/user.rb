@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :whiskies, dependent: :destroy
+
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_whiskies, through: :favorites, source: :whisky
+
 end

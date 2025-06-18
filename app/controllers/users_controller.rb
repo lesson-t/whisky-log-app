@@ -4,4 +4,9 @@ class UsersController < ApplicationController
   def mypage
     @whiskies = current_user.whiskies
   end
+
+  def favorites
+    @whiskies = current_user.favorite_whiskies
+  end
+
 end

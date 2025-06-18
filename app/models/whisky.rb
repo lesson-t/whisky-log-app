@@ -1,6 +1,9 @@
 class Whisky < ApplicationRecord
   belongs_to :user
 
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by, through: :favorites, source: :user
+
   has_many_attached :images
 
   validates :name, :genre, :country, :status, presence: true
