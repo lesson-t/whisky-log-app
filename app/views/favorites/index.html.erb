@@ -1,0 +1,31 @@
+<h1 class="text-2xl font-bold mb-6">お気に入りウイスキー一覧</h1>
+
+<% if @favorite_whiskies.any? %>
+  <table class="w-full text-left table-auto min-w-max">
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>ジャンル</th>
+        <th>国</th>
+        <th>飲んだ日</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @favorite_whiskies.each do |whisky| %>
+        <tr>
+          <td><%= whisky.name %></td>
+          <td><%= whisky.genre %></td>
+          <td><%= whisky.country %></td>
+          <td><%= whisky.drank_on %></td>
+          <td>
+            <%= link_to '詳細', whisky_path(whisky), class: "text-blue-600 hover:underline" %>
+            <%= button_to 'お気に入り解除', whisky_favorite_path(whisky), method: :delete, class: "text-gray-600" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>お気に入りに登録されたウイスキーはありません。</p>
+<% end %>

@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_whisky
+  before_action :set_whisky, only: %i[create destroy]
 
   def index
     @favorite_whiskies = current_user.favorite_whiskies.order(drank_on: :desc)
