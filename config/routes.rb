@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   root "whiskies#index"
 
   get 'mypage', to: 'users#mypage'
+  get 'users/:id/favorites', to: 'users#favorites', as: :user_favorites
 
   resources :whiskies do
     resource :favorite, only: [:create, :destroy]

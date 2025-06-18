@@ -2,6 +2,10 @@ class FavoritesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_whisky
 
+  def index
+    @favorite_whiskies = current_user.favorite_whiskies.order(drank_on: :desc)
+  end
+
   def create
     current_user.favorites.create(whisky: @whisky)
     redirect_back fallback_location: whiskies_path
