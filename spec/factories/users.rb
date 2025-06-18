@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :user do
-    email { "test@example.com" }
+    sequence(:email) { |n| "user#{n}@example.com" } # ← 重複しないようにする
     password { "password" }
+    password_confirmation { "password" }
   end
 end
