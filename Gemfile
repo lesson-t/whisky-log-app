@@ -50,6 +50,7 @@ gem 'pagy'
 gem 'chartkick'
 gem 'groupdate'
 gem 'tailwindcss-rails'
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

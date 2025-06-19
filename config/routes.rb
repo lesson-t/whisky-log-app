@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   # get 'users/:id/favorites', to: 'users#favorites', as: :user_favorites
   get 'favorites', to: 'favorites#index', as: :favorites
 
+  get 'tags/:tag', to: 'whiskies#tagged', as: :tag
+
   resources :whiskies do
     resource :favorite, only: [:create, :destroy]
     member do

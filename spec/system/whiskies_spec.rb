@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Whiskies", type: :system do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   # before do
   #   driven_by(:rack_test) # JSを使う場合は :selenium_chrome_headless に変更
@@ -17,5 +17,10 @@ RSpec.describe "Whiskies", type: :system do
     expect(current_path).to eq whiskies_path
     
     expect(page).to have_content("響")
+  end
+
+  it "can be tagged with multiple tags" do
+    whisky = create(:whisky, tag_list: "スモーキー, 日本")
+    expect(whisky.tag_list).to include("スモーキー", "日本")
   end
 end
