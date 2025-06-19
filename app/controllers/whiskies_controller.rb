@@ -50,6 +50,11 @@ class WhiskiesController < ApplicationController
     redirect_to @whisky, notice: "画像を削除しました"
   end
 
+  def tagged
+    @tag = params[:tag]
+    @whiskies = Whisky.tagged_with(@tag).order(drank_on: :desc)
+  end
+
   private
 
   def set_whisky
@@ -61,6 +66,6 @@ class WhiskiesController < ApplicationController
   end
 
   def whisky_params
-    params.require(:whisky).permit(:name, :genre, :country, :status, :rating, :comment, :drank_on, images: [])
+    params.require(:whisky).permit(:name, :genre, :country, :status, :rating, :comment, :drank_on, :tag_list, images: [])
   end
 end
