@@ -52,7 +52,10 @@ class WhiskiesController < ApplicationController
 
   def tagged
     @tag = params[:tag]
-    @whiskies = Whisky.tagged_with(@tag).order(drank_on: :desc)
+    # @whiskies = Whisky.tagged_with(@tag).order(drank_on: :desc)
+    @q = Whisky.tagged_with(@tag).ransack(params[:q])
+    @pagy, @whiskies = pagy(@q.result(distinct: true).order(drank_on: :desc), items: 10)
+    render :index
   end
 
   private

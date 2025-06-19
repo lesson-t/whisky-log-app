@@ -8,11 +8,9 @@
 <p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>飲んだ日:</strong> <%= @whisky.drank_on %></p>
 <p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>タグ:</strong> 
 <% if @whisky.tag_list.any? %>
-  <p>タグ: 
-    <% @whisky.tag_list.each do |tag| %>
-      <%= link_to "##{tag}", tag_path(tag), class: "text-blue-600 mr-2" %>
-    <% end %>
-  </p>
+  <% @whisky.tag_list.each do |tag| %>
+    <%= link_to "##{tag}", tag_path(tag), class: "text-blue-600 mr-2" %>
+  <% end %>
 <% end %>
 </p>
 
