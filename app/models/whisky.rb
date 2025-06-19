@@ -1,6 +1,8 @@
 class Whisky < ApplicationRecord
   belongs_to :user
 
+  acts_as_taggable_on :tags
+
   has_many :favorites, dependent: :destroy
   has_many :favorited_by, through: :favorites, source: :user
 
