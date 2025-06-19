@@ -6,6 +6,13 @@
 <p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>評価:</strong> <%= @whisky.rating %></p>
 <p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>感想:</strong> <%= @whisky.comment %></p>
 <p class="text-grey-500 text-xl mb-6 border-b border-gray-200"><strong>飲んだ日:</strong> <%= @whisky.drank_on %></p>
+<% if @whisky.tag_list.any? %>
+  <p>タグ: 
+    <% @whisky.tag_list.each do |tag| %>
+      <%= link_to "##{tag}", tag_path(tag), class: "text-blue-600 mr-2" %>
+    <% end %>
+  </p>
+<% end %>
 
 <div class="mb-8 border-b border-gray-200">
   <h2 class="text-grey-500 text-xl mb-4 font-bold">登録画像</h2>
