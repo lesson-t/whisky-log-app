@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WhiskiesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_whisky, only: %i[show edit update destroy remove_image]
@@ -10,28 +12,26 @@ class WhiskiesController < ApplicationController
     # @whiskies = current_user.whiskies.order(drank_on: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @whisky = current_user.whiskies.build
   end
 
+  def edit; end
+
   def create
     @whisky = current_user.whiskies.build(whisky_params)
     if @whisky.save
-      redirect_to @whisky, notice: "ウイスキーを登録しました。"
+      redirect_to @whisky, notice: 'ウイスキーを登録しました。'
     else
       render :new
     end
   end
 
-  def edit
-  end
-
   def update
     if @whisky.update(whisky_params)
-      redirect_to @whisky, notice: "ウイスキー情報を更新しました。"
+      redirect_to @whisky, notice: 'ウイスキー情報を更新しました。'
     else
       render :edit
     end
@@ -39,7 +39,7 @@ class WhiskiesController < ApplicationController
 
   def destroy
     @whisky.destroy
-    redirect_to whiskies_path, notice: "削除しました。"
+    redirect_to whiskies_path, notice: '削除しました。'
   end
 
   # 画像削除用のアクションを追加
@@ -47,7 +47,7 @@ class WhiskiesController < ApplicationController
     @whisky = current_user.whiskies.find(params[:id])
     image = @whisky.images.find(params[:image_id])
     image.purge
-    redirect_to @whisky, notice: "画像を削除しました"
+    redirect_to @whisky, notice: '画像を削除しました'
   end
 
   def tagged
@@ -65,10 +65,11 @@ class WhiskiesController < ApplicationController
   end
 
   def correct_user
-    redirect_to root_path, alert: "権限がありません" unless @whisky.user == current_user
+    redirect_to root_path, alert: '権限がありません' unless @whisky.user == current_user
   end
 
   def whisky_params
-    params.require(:whisky).permit(:name, :genre, :country, :status, :rating, :comment, :drank_on, :tag_list, images: [])
+    params.require(:whisky).permit(:name, :genre, :country, :status, :rating, :comment, :drank_on, :tag_list,
+                                   images: [])
   end
 end
