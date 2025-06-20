@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
@@ -8,5 +10,4 @@ class UsersController < ApplicationController
   def favorites
     @whiskies = current_user.favorite_whiskies
   end
-
 end
